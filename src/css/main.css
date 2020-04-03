@@ -1,0 +1,11 @@
+/**
+    Main CSS file, use where applicable.
+ */
+body {
+    background: black;
+}
+canvas {
+    display: block;
+    background: yellow;
+    margin: 5vw auto 0;
+}
