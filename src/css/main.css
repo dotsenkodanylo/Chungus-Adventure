@@ -6,6 +6,5 @@ body {
 }
 canvas {
     display: block;
-    background: yellow;
     margin: 5vw auto 0;
 }
