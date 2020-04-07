@@ -18,9 +18,9 @@ const
         let base = new Image();
         base.src = background;
 
-        console.log(base);
-        context.drawImage(base,
-            0, 0,
-            100, 100);
+        base.onload = () => {
+            context.drawImage(base,
+                0, 0);
+        }
     }
 })();
