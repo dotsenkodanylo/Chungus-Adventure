@@ -7,18 +7,29 @@
 import SpriteBox from "./SpriteBox";
 import background from './assets/blank-tiles.png';
 import {loadLevel} from "./loaders";
-import json from "./1-1.json";
-console.log(json);im
 
 const
     css = require('./css/main.css'),
     canvas = <HTMLCanvasElement>document.getElementById("game-screen"),
     context = canvas.getContext('2d');
 
+function drawBackground(background, context, sprites) {
+    background.ranges.forEach((range) => {
+        for (let x = range[0]; x < range[1]; x++) {
+            for (let y = range[2]; y < range[3]; y++) {
+                sprites.drawTile(background.tile, context, x, y);
+            }
+        }
+    })
+}
+
 (function run() {
     if (context) {
 
-        let base = new Image();
+        let
+            base = new Image(),
+            levels = loadLevel('1');
+
         base.src = background;
 
         base.onload = () => {
@@ -30,20 +41,9 @@ const
             sprites.define('soil', 2, 0);
             sprites.define('sky', 3, 0);
 
-            loadLevel("1-1")
-                .then(r => {
-                    console.log(r);
-                });
-
-
-            for (let x = 0; x < 16; x++) {
-                for (let y = 0; y < 10; y++) {
-                    // Draw function last 2 parameters are x/y coordinates within the canvas.
-                    sprites.drawTile('sky', context, x, y);
-                }
-                sprites.drawTile('ground', context, x, 8);
-                sprites.drawTile('bedrock', context, x, 9);
-            }
+            levels.backgrounds.forEach(background => {
+                drawBackground(background, context, sprites);
+            })
         }
     }
 })();

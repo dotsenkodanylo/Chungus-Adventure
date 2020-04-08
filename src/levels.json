@@ -1,0 +1,31 @@
+{
+  "backgrounds": [
+    {
+      "tile": "sky",
+      "ranges": [
+        [
+          0, 16,
+          0, 8
+        ]
+      ]
+    },
+    {
+      "tile": "ground",
+      "ranges": [
+        [
+          0, 16,
+          6, 7
+        ]
+      ]
+    },
+    {
+      "tile": "bedrock",
+      "ranges": [
+        [
+          0, 16,
+          7, 8
+        ]
+      ]
+    }
+  ]
+}
