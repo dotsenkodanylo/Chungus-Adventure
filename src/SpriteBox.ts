@@ -1,3 +1,7 @@
+/**
+ * Custom SpriteBox class, used to create sprite objects for a corresponding spriteSheet, based on the width of the
+ * individual sprites, which is passed in as a parameter.
+ */
 export default class SpriteBox {
     image: HTMLImageElement;
     width: number;
@@ -6,7 +10,7 @@ export default class SpriteBox {
     draw;
     drawTile;
 
-    constructor(image: HTMLImageElement, width: number, height: number) {
+    constructor(image, width: number, height: number) {
         this.image = image;
         this.width = width;
         this.height = height;
