@@ -1,7 +1,7 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    entry: './src/index.ts',
+    entry: './src/index.js',
     mode: "development",
     module: {
         rules: [
@@ -13,11 +13,6 @@ module.exports = {
                         options: {minimize: true}
                     }
                 ]
-            },
-            {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/
             },
             {
                 test: /\.css$/i,
@@ -39,7 +34,7 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: ['.js', '.ts', '.tsx']
+        extensions: ['.js']
     },
     plugins: [
         new HtmlWebPackPlugin({
@@ -47,4 +42,4 @@ module.exports = {
             filename: "./index.html"
         })
     ]
-}
+};

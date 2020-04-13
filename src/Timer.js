@@ -1,6 +1,4 @@
 export default class Timer {
-    updateProxy;
-    update;
 
     constructor(deltaTime = 1/60) {
         let

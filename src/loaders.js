@@ -1,5 +1,5 @@
 /**
- * TS file created for loading and parsing required assets.
+ * JS file created for loading and parsing required assets.
  * =---=---=
  * Imports and corresponding requirements:
  *      -> json: Importing required JSON for generating sprites based on horizontal/vertical canvas ranges.

@@ -2,8 +2,6 @@ const PRESSED = 1;
 const RELEASED = 0;
 
 export default class Keyboard {
-    keyStates;
-    keyMap;
 
     constructor() {
         this.keyStates = new Map();

@@ -3,14 +3,8 @@
  * individual sprites, which is passed in as a parameter.
  */
 export default class SpriteBox {
-    image: HTMLImageElement;
-    width: number;
-    height: number;
-    tiles;
-    draw;
-    drawTile;
 
-    constructor(image, width: number, height: number) {
+    constructor(image, width, height) {
         this.image = image;
         this.width = width;
         this.height = height;
@@ -21,7 +15,7 @@ export default class SpriteBox {
         this.define(name, x * this.width, y * this.height, this.width, this.height);
     }
 
-    define(name: string, x: number, y: number, width: number, height: number) {
+    define(name, x, y, width, height) {
         const buffer = document.createElement('canvas');
 
         if (buffer) {
