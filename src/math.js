@@ -1,4 +1,4 @@
-export default class Timer {
+export default class Math {
 
     constructor(deltaTime = 1/60) {
         let

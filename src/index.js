@@ -6,14 +6,10 @@
  */
 import SpriteBox from "./SpriteBox.js";
 import Compositor from "./Compositor";
-import Timer from "./Timer";
+import Math from "./math";
 import Keyboard from "./KeystrokeState";
 import {createBackgroundLayer} from "./layers";
-import {
-    loadLevel,
-    loadBackgroundSprites,
-    loadCharacterSprites
-} from "./loaders";
+import {loadLevel} from "./loaders";
 import {createChungus} from "./entities";
 
 const
@@ -21,30 +17,24 @@ const
     canvas = document.getElementById("game-screen"),
     context = canvas.getContext('2d');
 
-function createSpriteLayer(entity) {
-    return function drawSpriteLayer(context) {
-        entity.draw(context);
-    }
-}
 
 Promise.all([
-    loadBackgroundSprites(),
-    loadLevel(),
+    loadLevel('asdf'),
     createChungus()
 ])
-    .then(([backgroundSprites, level, chungus]) => {
+    .then(([level, chungus]) => {
             const
-                comp = new Compositor(),
-                backgroundLayer = createBackgroundLayer(level.backgrounds, backgroundSprites),
                 gravity = 1500,
-                timer = new Timer(1 / 60),
-                spriteLayer = createSpriteLayer(chungus);
+                timer = new Math(1 / 60);
 
-
-            comp.layers.push(backgroundLayer);
 
             const SPACE = 32;
             const input = new Keyboard();
+
+            chungus.position.set(60, 260);
+            chungus.velocity.set(100, -400);
+
+            level.entities.add(chungus);
 
             input.addMapping(SPACE, keyState => {
                 if (keyState) {
@@ -56,15 +46,9 @@ Promise.all([
 
             input.listenTo(window);
 
-
-            chungus.position.set(60, 260);
-            chungus.velocity.set(100, -400);
-
-            comp.layers.push(spriteLayer);
-
             timer.update = function update(deltaTime) {
-                chungus.update(deltaTime);
-                comp.drawLayer(context);
+                level.comp.drawLayer(context);
+                level.update(deltaTime);
                 chungus.velocity.y += gravity * deltaTime;
             };
 
