@@ -17,7 +17,7 @@ export function loadLevel() {
 }
 
 // Loading and returning the spriteSheet image.
-export function loadBackground() {
+export function loadSpriteSheetImage() {
     return new Promise(resolve => {
         const base = new Image();
 
@@ -32,15 +32,26 @@ export function loadBackground() {
 // Fetching the spriteSheet image and creating a custom SpriteBox class for the corresponding image, and returning the
 // new instance of sprites.
 export function loadBackgroundSprites() {
-    return loadBackground()
+    return loadSpriteSheetImage()
         .then(image => {
             const sprites = new SpriteBox(image, 50, 50);
 
-            sprites.define('bedrock', 0, 0);
-            sprites.define('ground', 1, 0);
-            sprites.define('soil', 2, 0);
-            sprites.define('sky', 3, 0);
+            sprites.defineTile('bedrock', 0, 0);
+            sprites.defineTile('ground', 1, 0);
+            sprites.defineTile('soil', 2, 0);
+            sprites.defineTile('sky', 3, 0);
 
             return sprites;
         });
+}
+
+export function loadCharacterSprites() {
+    return loadSpriteSheetImage()
+        .then(image => {
+            const sprites = new SpriteBox(image, 50, 50);
+
+            sprites.define('idle', 450, 50, 40, 50);
+
+            return sprites;
+        })
 }
