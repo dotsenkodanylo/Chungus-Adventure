@@ -15,6 +15,7 @@ export default class Entity {
     constructor() {
         this.position = new Vectors(0, 0);
         this.velocity = new Vectors(0, 0);
+        this.size = new Vectors(0, 0);
 
         this.traits = [];
     }

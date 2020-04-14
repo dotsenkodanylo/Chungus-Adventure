@@ -10,7 +10,9 @@ import Math from "./math";
 import Keyboard from "./KeystrokeState";
 import {createBackgroundLayer} from "./layers";
 import {loadLevel} from "./loaders";
+import {createCollisionLayer} from "./layers";
 import {createChungus} from "./entities";
+import {setupKeyboard} from "./input";
 
 const
     css = require('./css/main.css'),
@@ -28,23 +30,22 @@ Promise.all([
                 timer = new Math(1 / 60);
 
 
-            const SPACE = 32;
-            const input = new Keyboard();
-
-            chungus.position.set(60, 260);
-            chungus.velocity.set(100, -400);
-
+            level.comp.layers.push(createCollisionLayer(level));
+            chungus.position.set(0, 250);
             level.entities.add(chungus);
 
-            input.addMapping(SPACE, keyState => {
-                if (keyState) {
-                    chungus.jump.start();
-                } else {
-                    chungus.jump.cancel();
-                }
-            });
-
+            const input = setupKeyboard(chungus);
             input.listenTo(window);
+
+            // Debugging block
+            ['mousedown', 'mousemove'].forEach(eventName => {
+                canvas.addEventListener(eventName, event => {
+                    if(event.buttons === 1) {
+                        chungus.velocity.set(0, 0);
+                        chungus.position.set(event.offsetX, event.offsetY);
+                    }
+                })
+            });
 
             timer.update = function update(deltaTime) {
                 level.comp.drawLayer(context);
