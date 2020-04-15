@@ -4,6 +4,7 @@ import TileCollider from "./TileCollider";
 
 export default class Level {
     constructor() {
+        this.gravity = 3000;
         this.comp = new Compositor();
         this.entities = new Set();
         this.tiles = new Matrix();
@@ -18,6 +19,8 @@ export default class Level {
             this.tileCollider.checkX(entity);
             entity.position.y += entity.velocity.y * deltaTime;
             this.tileCollider.checkY(entity);
+
+            entity.velocity.y += this.gravity * deltaTime;
 
         })
     }
